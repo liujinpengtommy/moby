@@ -25,8 +25,11 @@
 
 FROM debian:jessie
 
+ENV http_proxy 'http://135.111.104.132:8081'
+ENV https_proxy 'http://135.111.104.132:8081'
 # allow replacing httpredir or deb mirror
 ARG APT_MIRROR=deb.debian.org
+COPY apt.conf /etc/apt/apt.conf
 RUN sed -ri "s/(httpredir|deb).debian.org/$APT_MIRROR/g" /etc/apt/sources.list
 
 # Packaged dependencies
